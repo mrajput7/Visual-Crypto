@@ -1,6 +1,7 @@
 clc;   
 close all;  
-%
+%This code convert color images into gray and do encryption on them, if you want to work on color just remove rgb2gray() and unit8() function.
+
 %ENCRYPTION PORTION
 %
 %Assigning Images
@@ -8,9 +9,9 @@ close all;
 prompt = 'Into how many part you want image to divide : ';
 n = input(prompt);
 for w = 1:n
-     M{w}=double((imread(strcat(num2str(w),'.png'))));  %reading image from same directory where script resides
+     M{w}=double(rgb2gray(uint8(imread(strcat(num2str(w),'.png')))));  %reading image from same directory where script resides;images are 1.png,2.png..and so on.
 end
-x = double(rgb2gray(uint8(imread('secret.png'))));      %testing for gray images but also work with color
+x = double(rgb2gray(uint8(imread('secret.png'))));      %taking secret image "we used secret.png for this purpose"
 y=x;
 disp(datestr(now,'HH:MM:SS FFF'));
 I{1}=M{1};
@@ -106,9 +107,7 @@ end
 % S{1.....N+1} ARE SECRET SHARES
 % E{1.....N} ARE IMAGES WHICH ARE RECONSTRUCTED AND E{N+1} GIVES THE IMAGE WHICH IS SAME AS ANOTHER IN DATABASE WHICH GIVES THE RESULT. 
 
-% IN FUTURE WE CAN CHANGE THE E{N+1} SUCH THAT WHEN SUPER IMPOSE ON DATA
-% IMAGES ONE BY ONE GIVE ANOTHER IMAGE WITH ANY ONE OF IMAGES ; WHICH WILL
-% LET US TO KNOW THE WHAT IS ACTUAL KEY AMONGST N IMAGES
+% IN FUTURE WE CAN CHANGE THE E{N+1} SUCH THAT IT DO NOT HAVE TO BE DIFFERENT THAN OTHERS, WHICH WILL DECREASE THE SUSPICION OF ATTACKER.
 
 
 
